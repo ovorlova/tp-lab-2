@@ -1,5 +1,9 @@
 #include "task3.h"
 
+template<class T>
+T change(T a) {
+	return 0;
+}
 int main() {
 
 	srand(time(NULL));
