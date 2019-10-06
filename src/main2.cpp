@@ -12,11 +12,6 @@ int main() {
 		cout << arr[i] << " ";  
 	}
 	cout << endl;
-	char** arr1;
-	arr1 = createArr<char*, n>(gen);
-	for (int i = 0; i < n; i++) {
-		cout << arr1[i] << " ";
-	}
 
 	return 0;
 }

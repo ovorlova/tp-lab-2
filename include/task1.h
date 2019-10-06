@@ -20,38 +20,41 @@ void msort( T* arr, int left, int right) {
 	int middle = (left + right) / 2;
 	msort(arr, left, middle);
 	msort(arr, middle+1, right);
-	queue <T> q1;
-	queue <T> q2;
 
+	T* q1 = new T[middle-left+1];
+	T* q2 = new T[right - middle];
+	 
 	for (int i = left; i <= middle; i++) {
-		q1.push(arr[i]);
+		q1[i-left] = arr[i];
 	}
 	for (int i = middle+1; i <= right; i++) {
-		q2.push(arr[i]);
+		q2[i - middle - 1] = arr[i];
 	}
 
 	int i = left;
-	while (!(q1.empty() || q2.empty())) {
-		if (cmp(q1.front(), q2.front())) {
-			arr[i] = q1.front();
-			q1.pop();
+	int ind_q1 = 0;
+	int ind_q2 = 0;
+	while (ind_q1 < middle - left + 1 && ind_q2 < right-middle) {
+		if (cmp(q1[ind_q1], q2[ind_q2])) {
+			arr[i] = q1[ind_q1];
+			ind_q1++;
 		}
 		else {
-			arr[i] = q2.front();
-			q2.pop();
+			arr[i] = q2[ind_q2];
+			ind_q2++;
 		}
 		i++;
 	}
 
-	while (!q1.empty()) {
-		arr[i] = q1.front();
-		q1.pop();
+	while (ind_q1 < middle - left + 1) {
+		arr[i] = q1[ind_q1];
+		ind_q1++;
 		i++;
 	}
 
-	while (!q2.empty()) {
-		arr[i] = q2.front();
-		q2.pop();
+	while (ind_q2 < right - middle){
+		arr[i] = q2[ind_q2];
+		ind_q2++;
 		i++;
 	}
 }
